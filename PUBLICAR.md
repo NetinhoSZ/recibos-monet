@@ -43,6 +43,11 @@ Pronto. Na próxima vez que cada pessoa abrir o app, a atualização chega.
 
 ## Observações
 
+- Se o `npm run publicar` terminar com **`422 Unprocessable Entity`**, rode de novo: é falha de envio do GitHub,
+  e a segunda vez completa o que faltou. Confira em Releases que a versão tem os 4 arquivos
+  (instalador, portátil, `.blockmap` e **`latest.yml`** — sem o `latest.yml` ninguém recebe a atualização).
+- Se der **`403 Resource not accessible`**, o token está sem permissão: no token, Contents → **Read and write**
+  (ou token clássico com **public_repo**).
 - `npm run build` só gera os arquivos em `dist/`, sem publicar.
 - O build usa o cache em `D:\electron-cache` (o C: está sem espaço) — ajuste em `build.js` se mudar.
 - Erros da checagem de atualização ficam em `dados-app/atualizacao.log` (instalado: `%APPDATA%\Recibos Monet`).
