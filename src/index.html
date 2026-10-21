@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self'">
+<title>Recibos Monet</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside class="side">
+  <header class="head">
+    <div class="logo"><img src="assets/m-mark.png" alt=""><div><b>Recibos</b><span id="appVersion">Monet Creative</span></div></div>
+    <div class="head-actions">
+      <button class="ghost" id="btnCatalog">Produtos</button>
+      <button class="ghost" id="btnNew">Novo recibo</button>
+    </div>
+  </header>
+
+  <div class="form">
+    <section>
+      <h2>Cliente</h2>
+      <input id="client" placeholder="Nome do cliente ou empresa" autocomplete="off">
+      <div class="two">
+        <label>Data de emissão<input id="date" type="date"></label>
+        <label>Número do recibo
+          <div class="num"><input id="numbered" type="checkbox" title="Mostrar número"><input id="number" type="number" min="1" step="1"></div>
+        </label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Produtos e serviços</h2>
+      <div id="items"></div>
+      <div class="add">
+        <select id="addFromCatalog"><option value="">+ Adicionar produto cadastrado…</option></select>
+        <button class="ghost" id="btnAddCustom">+ Item avulso</button>
+      </div>
+      <div class="total"><span>Total</span><b id="total">R$ 0,00</b></div>
+      <p class="extenso" id="extenso"></p>
+    </section>
+
+    <section>
+      <h2>Forma de pagamento</h2>
+      <div class="seg">
+        <label><input type="radio" name="pay" value="pix"><span>Pix</span></label>
+        <label><input type="radio" name="pay" value="card"><span>Cartão (Mercado Pago)</span></label>
+      </div>
+    </section>
+
+    <section id="secCard" hidden>
+      <h2>Pagamento com cartão</h2>
+      <label>Access Token do Mercado Pago
+        <div class="keyrow"><input id="mpKey" type="password" autocomplete="off" placeholder="APP_USR-…"><button class="ghost" id="mpKeySave">Salvar</button></div>
+      </label>
+      <p class="note" id="mpKeyNote"></p>
+      <div class="two">
+        <label>Parcelar em até
+          <select id="cardInst"></select>
+        </label>
+      </div>
+      <div class="cardlink" id="cardLink">
+        <p id="cardInfo"></p>
+        <div class="btns">
+          <button class="ghost" id="cardGen">Gerar link</button>
+          <button class="ghost" id="cardCopy">Copiar link</button>
+          <button class="ghost" id="cardOpen">Abrir</button>
+          <button class="ghost" id="cardCheck">Ver se pagou</button>
+        </div>
+      </div>
+      <p class="warn" id="cardWarn"></p>
+    </section>
+
+    <section id="secPix">
+      <h2>Pagamento Pix</h2>
+      <div class="pixkey">
+        <select id="pixType">
+          <option value="email">E-mail</option>
+          <option value="doc">CPF / CNPJ</option>
+          <option value="phone">Telefone</option>
+          <option value="evp">Chave aleatória</option>
+        </select>
+        <input id="pixKey" placeholder="Chave Pix" autocomplete="off">
+      </div>
+      <p class="warn" id="pixWarn"></p>
+      <div class="two">
+        <label>Nome do recebedor<input id="pixName" maxlength="25"></label>
+        <label>Cidade<input id="pixCity" maxlength="15"></label>
+      </div>
+      <label class="check"><input id="showQr" type="checkbox"> Incluir QR Code com o valor total</label>
+    </section>
+
+    <section>
+      <h2>Observações <small>(opcional)</small></h2>
+      <textarea id="obs" rows="2" placeholder="Ex.: pagamento em 2x, prazo de entrega…"></textarea>
+    </section>
+  </div>
+
+  <div class="update" id="update" hidden></div>
+  <footer class="actions">
+    <button class="primary" id="btnPng">Salvar imagem (PNG)</button>
+    <button class="ghost" id="btnPdf">Salvar PDF</button>
+  </footer>
+</aside>
+
+<main class="stage" id="stage">
+  <div class="paper" id="paper"><iframe id="preview" title="Prévia do recibo"></iframe></div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<dialog id="catalog">
+  <div class="dlg-head"><h2>Produtos cadastrados</h2><button class="x" id="catalogClose" aria-label="Fechar">×</button></div>
+  <p class="hint">Cadastre aqui o que a Monet vende. Depois é só escolher na lista ao montar o recibo.</p>
+  <div class="cat-head"><span>Produto</span><span>Descrição</span><span>Valor</span><span></span></div>
+  <div id="catList"></div>
+  <button class="ghost" id="catAdd">+ Cadastrar produto</button>
+</dialog>
+
+<script src="receipt.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "name": "recibos-monet",
+  "version": "1.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "node --experimental-require-module build.js",
+    "publicar": "node --experimental-require-module build.js publicar"
+  },
+  "keywords": [],
+  "author": "Monet Creative",
+  "license": "ISC",
+  "description": "Gerador de recibos Monet Creative",
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "electron": "^41.7.1",
+    "electron-builder": "^26.15.3"
+  },
+  "productName": "Recibos Monet",
+  "build": {
+    "appId": "br.com.monetcreative.recibos",
+    "productName": "Recibos Monet",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "dir",
+        "nsis",
+        "portable"
+      ],
+      "icon": "build-icon.ico"
+    },
+    "electronDist": "node_modules/electron/dist",
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Recibos Monet",
+      "installerIcon": "build-icon.ico",
+      "uninstallerIcon": "build-icon.ico",
+      "installerLanguages": [
+        "pt_BR"
+      ],
+      "language": "1046",
+      "artifactName": "Recibos-Monet-Instalador-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "Recibos-Monet-Portatil-${version}.${ext}"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "NetinhoSZ",
+        "repo": "recibos-monet",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NetinhoSZ/recibos-monet.git"
+  }
+}
